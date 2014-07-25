@@ -1,0 +1,14 @@
+<h2>Stats</h2>
+<p>Total users: {{users_count}}</p>
+<p>Total questions: {{questions_count}}</p>
+
+<h2>Top 10</h2>
+{% if top10 %}
+    <ul>
+    {% for question in top10 %}
+        <li>{{question.text}} - {{question.num_users}}</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No questions</p>
+{% endif %}
