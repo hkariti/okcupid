@@ -25,7 +25,7 @@ def add_user(request):
     parser = etree.HTMLParser()
     url = request.POST['user']
     username = extract_username(url)
-    url = 'http://www.okcupid.com/profile/%s/questions?she_care=1' % users_count
+    url = 'http://www.okcupid.com/profile/%s/questions?she_care=1' % username
     html = requests.get(url).text
     #html = file('q.htm').read()
     parser.feed(html)
