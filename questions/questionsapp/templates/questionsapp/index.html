@@ -12,3 +12,10 @@
 {% else %}
     <p>No questions</p>
 {% endif %}
+
+<form action="{% url 'add_user' %}" method="post">
+    {% csrf_token %}
+    <input type="text" name="user">
+    <input type="submit">
+</form>
+    
