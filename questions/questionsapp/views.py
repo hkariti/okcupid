@@ -13,7 +13,9 @@ def index(request, user=None):
     users_count = User.objects.count()
     questions_count = Question.objects.count()
     top10 = Question.objects.annotate(num_users=Count('users')).order_by('-num_users')[:10]
-    context = dict(users_count=users_count, questions_count=questions_count, top10=top10)
+    if user is not None:
+        user = User.objects.get(pk=user)
+    context = dict(users_count=users_count, questions_count=questions_count, top10=top10, user=user)
     return render(request, 'questionsapp/index.html', context)
 
 def extract_username(url):
@@ -33,9 +35,9 @@ def add_user(request):
     dom = parser.close()
     questions_div = dom.find('body/div[@id="body_wrapper"]/div[@id="wrapper"]/div[@id="page"]/div[@id="main_content"]/div[@class="monolith"]/div[@class="big_dig clearfix "]')
     try:
-        user = User.objects.get(username=username)
+        user = User.objects.get(name=username)
     except User.DoesNotExist:
-        user = User(url=url, username=username)
+        user = User(url=url, name=username)
         user.save()
     for i in questions_div.getiterator():
         if str(i.get('id')).startswith('qtext_'):

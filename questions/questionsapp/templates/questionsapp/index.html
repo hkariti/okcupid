@@ -2,6 +2,10 @@
 <p>Total users: {{users_count}}</p>
 <p>Total questions: {{questions_count}}</p>
 
+{% if user %}
+<p> Added user {{ user.name }} with {{ user.question_set.count }} questions.</p>
+{% endif %}
+
 <h2>Top 10</h2>
 {% if top10 %}
     <ul>
