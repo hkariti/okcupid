@@ -24,11 +24,8 @@ def extract_username(url):
 def add_user(request):
     parser = etree.HTMLParser()
     url = request.POST['user']
-    if not url.startswith('http'):
-        url = 'http://' + url
-    if not url.endswith('questions?she_care=1'):
-        url = url.rstrip('/') + '/questions?she_care=1'
     username = extract_username(url)
+    url = 'http://www.okcupid.com/profile/%s/questions?she_care=1' % users_count
     html = requests.get(url).text
     #html = file('q.htm').read()
     parser.feed(html)
