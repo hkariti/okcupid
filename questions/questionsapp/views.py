@@ -19,7 +19,7 @@ def index(request, user=None):
     return render(request, 'questionsapp/index.html', context)
 
 def extract_username(url):
-    return re.findall('profile/([^/]*)', url)[0]
+    return re.findall('profile/([a-zA-Z0-9_-]*)', url)[0]
 
 def add_user(request):
     parser = etree.HTMLParser()
